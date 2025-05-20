@@ -4,6 +4,7 @@ import "./App.css";
 // import Button from "./components/Button";
 import ListGroup from "./components/ListGroup";
 import { BsFillCalendarHeartFill } from "react-icons/bs";
+import Like from "./components/Like";
 
 function App() {
   const items = ["Karachi", "Lahore", "Quetta", "Peshawar", "Islamabad"];
@@ -12,6 +13,11 @@ function App() {
   const handleSelectItem = (item: string) => {
     console.log(item);
   };
+  const handleOnClick = (event: Event) => {
+    console.log("clicked")
+    console.log(event)
+  } 
+  return (<Like onClick={handleOnClick}/>)
   return ( <div><BsFillCalendarHeartFill color="red" /></div>);
   return (
     <div>
