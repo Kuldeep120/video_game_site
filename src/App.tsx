@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import { produce } from "immer";
 
 function App() {
   const [cart, setCart] = useState({
@@ -19,7 +20,10 @@ function App() {
   });
   console.log(cart);
   const handleClick = () => {
-    const newCart = {...cart,items: cart.items.map((item)=> item.id===1?{...item, qty:2}:item)};
+    const newCart = produce((draft) => {
+      const item1 = draft.items.find((item) => item.id === 1);
+      item1.qty++;
+    });
     setCart(newCart);
   };
   return (
