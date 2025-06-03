@@ -7,9 +7,11 @@ interface User {
 const ListUsers = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     const controller = new AbortController();
+    setIsLoading(true)
     axiosClient
       .get("users", {
         signal: controller.signal,
@@ -17,11 +19,13 @@ const ListUsers = () => {
       .then((res) => {
         console.log(res.data);
         setUsers(res.data);
+        setIsLoading(false)
       })
       .catch((err) => {
         console.log(err);
         if (err instanceof CanceledError) return;
         setError(err.message);
+        setIsLoading(false)
       });
     return () => controller.abort();
   }, []);
@@ -59,6 +63,9 @@ const ListUsers = () => {
       .then((res) => console.log(res.data))
       .catch((err) => setError(err.mesage));
   };
+  
+  if (isLoading) 
+    return <div className="spinner-border"></div>
 
   return (
     <>
