@@ -1,4 +1,3 @@
-import axiosClient from "./apiClient";
 import create from "./httpService";
 export interface User {
     id: number;
@@ -6,7 +5,7 @@ export interface User {
 }
 
 const useService = create("/users")
- 
+
 export default useService;
 
 // class UserService {
